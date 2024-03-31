@@ -1,41 +1,52 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-type AppContextProvider = {
+type AppContextType = {
   developerType: string;
   changeDeveloperType: (type: string) => void;
   languageType: string;
   changeLanguageType: (type: string) => void;
+  learningType: string;
+  changeLearningType: (type: string) => void;
 };
 
-const defaultAppContextValue: AppContextProvider = {
+const defaultAppContextValue: AppContextType = {
   developerType: "",
-  changeDeveloperType: () => {}, 
+  changeDeveloperType: () => {},
   languageType: "",
-  changeLanguageType: () => {}, 
+  changeLanguageType: () => {},
+  learningType: "",
+  changeLearningType: () => {},
 };
 
-const AppContextProvider = createContext<AppContextProvider>(defaultAppContextValue);
+const AppContext = createContext<AppContextType>(defaultAppContextValue);
 
-export const useAppContext = () => useContext(AppContextProvider);
+export const useAppContext = () => useContext(AppContext);
 
-type DeveloperProviderProps = {
+type AppProviderProps = {
   children: ReactNode;
 };
 
-export const AppProvider = ({ children }: DeveloperProviderProps) => {
+export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [developerType, setDeveloperType] = useState("");
-  const [languageType, setLanguageType] = useState(""); 
-  const changeDeveloperType = (type: string) => {
-    setDeveloperType(type);
-  };
+  const [languageType, setLanguageType] = useState("");
+  const [learningType, setLearningType] = useState("");
 
-  const changeLanguageType = (type: string) => { 
-    setLanguageType(type);
-  };
+  const changeDeveloperType = (type: string) => setDeveloperType(type);
+  const changeLanguageType = (type: string) => setLanguageType(type);
+  const changeLearningType = (type: string) => setLearningType(type);
 
   return (
-    <AppContextProvider.Provider value={{ developerType, changeDeveloperType, languageType, changeLanguageType}}>
+    <AppContext.Provider
+      value={{
+        developerType,
+        changeDeveloperType,
+        languageType,
+        changeLanguageType,
+        learningType,
+        changeLearningType,
+      }}
+    >
       {children}
-    </AppContextProvider.Provider>
+    </AppContext.Provider>
   );
 };

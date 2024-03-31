@@ -2,13 +2,13 @@ import { Box } from "@mui/material";
 import Header from "../components/Header";
 import { t } from "i18next";
 import React from "react";
-import LanguageBox from "../components/languageBox";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
+import ContainerBox from "../components/containerBox";
 
 const Developer = () => {
   const { languageType } = useAppContext();
-  const { changeLanguageType } = useAppContext();
+  const { changeLearningType } = useAppContext();
   const { developerType } = useAppContext();
 
   let navigate = useNavigate();
@@ -59,11 +59,11 @@ const Developer = () => {
     }
 
     return (
-      <LanguageBox
-        Language={languages}
+      <ContainerBox
+        Content={languages}
         handleClick={(type: string) => {
-          changeLanguageType(type);
-          navigate("/language");
+          changeLearningType(type);
+          navigate("/learning");
         }}
         styles={{
           height: "50px",
@@ -83,7 +83,11 @@ const Developer = () => {
 
   return (
     <Box>
-      <Header titleHeader={t(languageType)} />
+      <Header
+        titleHeader={t(languageType)}
+        backArrow={true}
+        handleClick={() => navigate(-1)}
+      />
       <Box marginTop={"60px"}>{renderLanguageBox()}</Box>
     </Box>
   );

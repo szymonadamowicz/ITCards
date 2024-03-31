@@ -3,19 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import Header from "../components/Header";
 import { t } from "i18next";
-import DeveloperBox from "./../components/developerBox";
-import { useAppContext } from "../context/appContext"; 
+import ContainerBox from "../components/containerBox";
+import { useAppContext } from "../context/appContext";
 
 const FirstPage = () => {
   let navigate = useNavigate();
-  const { changeDeveloperType } = useAppContext(); 
+  const { changeDeveloperType } = useAppContext();
 
   return (
     <Box>
       <Header titleHeader={t("Infiszki")} />
       <Box marginTop={"60px"}>
-        <DeveloperBox
-          Developer={[
+        <ContainerBox
+          Content={[
             "FRONT-END Developer",
             "BACK-END Developer",
             "FULLSTACK Developer",
@@ -32,14 +32,14 @@ const FirstPage = () => {
             alignItems: "center",
             display: "flex",
             justifyContent: "center",
-            '&:hover': {
+            "&:hover": {
               backgroundColor: "red",
             },
           }}
-          />
-          </Box>
-        </Box>
-      );
-    };
+        />
+      </Box>
+    </Box>
+  );
+};
 
 export default FirstPage;
