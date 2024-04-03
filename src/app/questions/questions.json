@@ -1,11 +1,11 @@
 {
   "JAVASCRIPT": [
     {
-      "question": "Co to jest JavaScript?",
+      "question": "**Co to jest JavaScript?**",
       "answer": "JavaScript to język programowania stosowany do tworzenia interaktywnych stron internetowych."
     },
     {
-      "question": "Jakie są trzy podstawowe typy danych w JavaScript?",
+      "question": "**Jakie są trzy podstawowe** typy danych w JavaScript?",
       "answer": "Trzy podstawowe typy danych w JavaScript to: liczby (numbers), ciągi znaków (strings) i logiczne (booleans)."
     },
     {

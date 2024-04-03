@@ -4,6 +4,7 @@ import { useAppContext } from "../context/appContext";
 import rawQuestionData from "../questions/questions.json";
 import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
+import { marked } from "marked";
 
 interface Question {
   question: string;
@@ -20,7 +21,7 @@ const QuestionInterviewBox: React.FC = () => {
   const { languageType } = useAppContext();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
+  const [orderQuestions, setOrderQuestions] = useState<Question[]>([]);
   const [hasSwiped, setHasSwiped] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState(0);
@@ -29,14 +30,14 @@ const QuestionInterviewBox: React.FC = () => {
     const questionsDataMap =
       questionData[languageType as keyof QuestionData] ||
       questionData.JAVASCRIPT;
-    setShuffledQuestions(questionsDataMap);
+    setOrderQuestions(questionsDataMap);
     setCurrentQuestionIndex(0);
   }, [languageType]);
 
   const handleSwipe = (direction: number) => {
     setSwipeDirection(direction);
     if (
-      (direction > 0 && currentQuestionIndex < shuffledQuestions.length) ||
+      (direction > 0 && currentQuestionIndex < orderQuestions.length) ||
       (direction < 0 && currentQuestionIndex > 0)
     ) {
       setIsFlipped(false);
@@ -44,7 +45,7 @@ const QuestionInterviewBox: React.FC = () => {
       setTimeout(() => {
         if (direction > 0) {
           setCurrentQuestionIndex((prevIndex) =>
-            Math.min(prevIndex + 1, shuffledQuestions.length)
+            Math.min(prevIndex + 1, orderQuestions.length)
           );
         } else {
           setCurrentQuestionIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -75,6 +76,13 @@ const QuestionInterviewBox: React.FC = () => {
     }),
   };
 
+  const renderMarkdown = (text: string) => {
+    if (text == null) {
+      return { __html: "" };
+    }
+    return { __html: marked.parse(text) };
+  };
+
   return (
     <Box
       width={"100%"}
@@ -83,6 +91,12 @@ const QuestionInterviewBox: React.FC = () => {
       alignItems="center"
       justifyContent="center"
     >
+      <Box mb={5}>
+        <Typography textAlign={"center"}>
+          {currentQuestionIndex}/{orderQuestions.length}
+        </Typography>
+        <progress value={currentQuestionIndex / 5} />
+      </Box>
       <motion.div
         key={currentQuestionIndex}
         custom={swipeDirection}
@@ -110,7 +124,7 @@ const QuestionInterviewBox: React.FC = () => {
               handleSwipe(-1);
             } else if (
               offset.x < -swipeThreshold &&
-              currentQuestionIndex < shuffledQuestions.length
+              currentQuestionIndex < orderQuestions.length
             ) {
               handleSwipe(1);
             }
@@ -127,13 +141,13 @@ const QuestionInterviewBox: React.FC = () => {
             onClick={() => {
               if (
                 !hasDragged &&
-                currentQuestionIndex != shuffledQuestions.length
+                currentQuestionIndex != orderQuestions.length
               ) {
                 setIsFlipped((prev) => !prev);
               }
               setHasDragged(false);
             }}
-            disabled={currentQuestionIndex >= shuffledQuestions.length}
+            disabled={currentQuestionIndex >= orderQuestions.length}
             sx={{
               height: 300,
               width: 200,
@@ -141,23 +155,26 @@ const QuestionInterviewBox: React.FC = () => {
               "&:hover": { backgroundColor: "red" },
             }}
           >
-            <Typography color={"white"}>
-              {currentQuestionIndex < shuffledQuestions.length
-                ? shuffledQuestions[currentQuestionIndex]?.question
-                : "All questions have been asked."}
-            </Typography>
+            <Typography
+              color="white"
+              dangerouslySetInnerHTML={
+                renderMarkdown(
+                  orderQuestions[currentQuestionIndex]?.question
+                ) as { __html: string }
+              }
+            />
           </Button>
           <Button
             onClick={() => {
               if (
                 !hasDragged &&
-                currentQuestionIndex != shuffledQuestions.length
+                currentQuestionIndex != orderQuestions.length
               ) {
                 setIsFlipped((prev) => !prev);
               }
               setHasDragged(false);
             }}
-            disabled={currentQuestionIndex >= shuffledQuestions.length}
+            disabled={currentQuestionIndex >= orderQuestions.length}
             sx={{
               height: 300,
               width: 200,
@@ -165,11 +182,14 @@ const QuestionInterviewBox: React.FC = () => {
               "&:hover": { backgroundColor: "red" },
             }}
           >
-            <Typography color={"white"}>
-              {currentQuestionIndex < shuffledQuestions.length
-                ? shuffledQuestions[currentQuestionIndex]?.answer
-                : "All questions have been asked."}
-            </Typography>
+            <Typography
+              color="white"
+              dangerouslySetInnerHTML={
+                renderMarkdown(
+                  orderQuestions[currentQuestionIndex]?.answer
+                ) as { __html: string }
+              }
+            />
           </Button>
         </ReactCardFlip>
       </motion.div>
@@ -182,13 +202,13 @@ const QuestionInterviewBox: React.FC = () => {
         </Button>
         <Button
           onClick={handleClick}
-          disabled={currentQuestionIndex >= shuffledQuestions.length}
+          disabled={currentQuestionIndex >= orderQuestions.length}
         >
           Show Answer
         </Button>
         <Button
           onClick={() => handleSwipe(1)}
-          disabled={currentQuestionIndex >= shuffledQuestions.length}
+          disabled={currentQuestionIndex >= orderQuestions.length}
         >
           Next Question
         </Button>

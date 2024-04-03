@@ -4,6 +4,7 @@ import { useAppContext } from "../context/appContext";
 import rawQuestionData from "../questions/questions.json";
 import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
+import { marked } from "marked";
 
 interface Question {
   question: string;
@@ -76,6 +77,13 @@ const QuestionInterviewBox: React.FC = () => {
     }),
   };
 
+  const renderMarkdown = (text: string) => {
+    if (text == null) {
+      return { __html: "" };
+    }
+    return { __html: marked.parse(text) };
+  };
+
   return (
     <Box
       width={"100%"}
@@ -84,6 +92,12 @@ const QuestionInterviewBox: React.FC = () => {
       alignItems="center"
       justifyContent="center"
     >
+      <Box mb={5}>
+        <Typography textAlign={"center"}>
+          {currentQuestionIndex}/{shuffledQuestions.length}
+        </Typography>
+        <progress value={currentQuestionIndex / 5} />
+      </Box>
       <motion.div
         key={currentQuestionIndex}
         custom={swipeDirection}
@@ -142,11 +156,16 @@ const QuestionInterviewBox: React.FC = () => {
               "&:hover": { backgroundColor: "red" },
             }}
           >
-            <Typography color={"white"}>
-              {currentQuestionIndex < shuffledQuestions.length
-                ? shuffledQuestions[currentQuestionIndex]?.question
-                : "All questions have been asked."}
-            </Typography>
+            <Typography
+              color="white"
+              dangerouslySetInnerHTML={
+                renderMarkdown(
+                  currentQuestionIndex < shuffledQuestions.length
+                    ? shuffledQuestions[currentQuestionIndex]?.question
+                    : "All questions have been asked."
+                ) as { __html: string }
+              }
+            />
           </Button>
           <Button
             onClick={() => {
@@ -166,11 +185,16 @@ const QuestionInterviewBox: React.FC = () => {
               "&:hover": { backgroundColor: "red" },
             }}
           >
-            <Typography color={"white"}>
-              {currentQuestionIndex < shuffledQuestions.length
-                ? shuffledQuestions[currentQuestionIndex]?.answer
-                : "All questions have been asked."}
-            </Typography>
+            <Typography
+              color="white"
+              dangerouslySetInnerHTML={
+                renderMarkdown(
+                  currentQuestionIndex < shuffledQuestions.length
+                    ? shuffledQuestions[currentQuestionIndex]?.answer
+                    : "All questions have been asked."
+                ) as { __html: string }
+              }
+            />
           </Button>
         </ReactCardFlip>
       </motion.div>
