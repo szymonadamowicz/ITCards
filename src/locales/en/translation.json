@@ -1,13 +1,8 @@
 {
-    "Change Language": "Change Language",
-    "Contact": "Contacts",
-    "English": "English",
-    "Polish": "Polish",
-    "Hello!": "Hello!",
-    "My name is Szymon Adamowicz": "My name is Szymon Adamowicz",
-    "I am currently working as a FrontEnd Developer for": "I am currently working as a FrontEnd Developer for",
-    "I used to work as a QA Tester at QLoc Company for 3 months": "I used to work as a QA Tester at QLoc Company for 3 months",
-    "More about my work experience here": "More about my experience here",
-    "I am also a first year student at the University Of Gdańsk": "I am also a first year student at the University Of Gdańsk",
-    "Info about me": "Info about me"
-  }
+  "Change Language": "Change Language",
+  "Contact": "Contacts",
+  "English": "English",
+  "Polish": "Polish",
+  "Hello!": "Hello!",
+  "**Co to jest JavaScript?**": "**What is JavaScript?**"
+}

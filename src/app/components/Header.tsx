@@ -1,5 +1,7 @@
 import React from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 type Links = {
   titleHeader?: string;
@@ -32,7 +34,7 @@ const Header: React.FC<Links> = ({ titleHeader, handleClick, backArrow }) => {
             onClick={() => handleClick && handleClick()}
             sx={{ position: "absolute", left: 0, color: "white" }}
           >
-            asd
+            <FontAwesomeIcon icon={faChevronLeft} size="lg" />
           </Button>
         ) : null}
 

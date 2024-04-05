@@ -5,6 +5,7 @@ import rawQuestionData from "../questions/questions.json";
 import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
 import { marked } from "marked";
+import { t } from "i18next";
 
 interface Question {
   question: string;
@@ -161,8 +162,8 @@ const QuestionInterviewBox: React.FC = () => {
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < shuffledQuestions.length
-                    ? shuffledQuestions[currentQuestionIndex]?.question
-                    : "All questions have been asked."
+                    ? t(shuffledQuestions[currentQuestionIndex]?.question)
+                    : t("All questions have been asked.")
                 ) as { __html: string }
               }
             />
@@ -190,8 +191,8 @@ const QuestionInterviewBox: React.FC = () => {
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < shuffledQuestions.length
-                    ? shuffledQuestions[currentQuestionIndex]?.answer
-                    : "All questions have been asked."
+                    ? t(shuffledQuestions[currentQuestionIndex]?.answer)
+                    : t("All questions have been asked.")
                 ) as { __html: string }
               }
             />

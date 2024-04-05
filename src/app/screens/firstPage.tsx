@@ -9,7 +9,7 @@ import { useAppContext } from "../context/appContext";
 const FirstPage = () => {
   let navigate = useNavigate();
   const { changeDeveloperType } = useAppContext();
-
+  const { userName } = useAppContext();
   return (
     <Box>
       <Header titleHeader={t("Infiszki")} />

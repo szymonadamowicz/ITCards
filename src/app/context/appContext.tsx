@@ -7,6 +7,8 @@ type AppContextType = {
   changeLanguageType: (type: string) => void;
   learningType: string;
   changeLearningType: (type: string) => void;
+  userName: string;
+  changeUserName: (type: string) => void;
 };
 
 const defaultAppContextValue: AppContextType = {
@@ -16,6 +18,8 @@ const defaultAppContextValue: AppContextType = {
   changeLanguageType: () => {},
   learningType: "",
   changeLearningType: () => {},
+  userName: "",
+  changeUserName: () => {},
 };
 
 const AppContext = createContext<AppContextType>(defaultAppContextValue);
@@ -30,10 +34,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [developerType, setDeveloperType] = useState("");
   const [languageType, setLanguageType] = useState("");
   const [learningType, setLearningType] = useState("");
+  const [userName, setUserName] = useState("");
 
   const changeDeveloperType = (type: string) => setDeveloperType(type);
   const changeLanguageType = (type: string) => setLanguageType(type);
   const changeLearningType = (type: string) => setLearningType(type);
+  const changeUserName = (type: string) => setUserName(type);
 
   return (
     <AppContext.Provider
@@ -44,6 +50,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         changeLanguageType,
         learningType,
         changeLearningType,
+        userName,
+        changeUserName,
       }}
     >
       {children}

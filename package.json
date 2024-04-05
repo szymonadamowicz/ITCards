@@ -5,6 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/material": "^5.15.14",
     "@react-spring/web": "^9.7.3",
     "@testing-library/jest-dom": "^5.17.0",
@@ -14,6 +17,7 @@
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "@use-gesture/react": "^10.3.1",
+    "firebase": "^10.10.0",
     "framer-motion": "^11.0.24",
     "i18next": "^23.10.1",
     "marked": "^12.0.1",

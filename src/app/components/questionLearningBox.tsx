@@ -159,7 +159,9 @@ const QuestionInterviewBox: React.FC = () => {
               color="white"
               dangerouslySetInnerHTML={
                 renderMarkdown(
-                  orderQuestions[currentQuestionIndex]?.question
+                  currentQuestionIndex < orderQuestions.length
+                    ? orderQuestions[currentQuestionIndex]?.question
+                    : "All questions have been asked."
                 ) as { __html: string }
               }
             />
@@ -186,7 +188,9 @@ const QuestionInterviewBox: React.FC = () => {
               color="white"
               dangerouslySetInnerHTML={
                 renderMarkdown(
-                  orderQuestions[currentQuestionIndex]?.answer
+                  currentQuestionIndex < orderQuestions.length
+                    ? orderQuestions[currentQuestionIndex]?.answer
+                    : "All questions have been asked."
                 ) as { __html: string }
               }
             />
