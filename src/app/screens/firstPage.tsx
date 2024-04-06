@@ -12,7 +12,7 @@ const FirstPage = () => {
   const { userName } = useAppContext();
   return (
     <Box>
-      <Header titleHeader={t("Infiszki")} />
+      <Header titleHeader={t("ITCards")} />
       <Box marginTop={"60px"}>
         <ContainerBox
           Content={[

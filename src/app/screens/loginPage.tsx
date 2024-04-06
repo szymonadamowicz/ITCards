@@ -14,7 +14,7 @@ const Login = () => {
 
   return (
     <Box>
-      <Header titleHeader={t("Infiszki")} />
+      <Header titleHeader={t("ITCards")} />
       <Box
         paddingTop={"60px"}
         display={"flex"}

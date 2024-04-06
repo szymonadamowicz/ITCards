@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# ITCards - Interactive Learning Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Table of Contents
 
-## Available Scripts
+1. [**About the Project**](#about-the-project)
+   - What is ITCards? Discover the core idea and purpose behind this interactive learning platform.
+2. [**Features**](#features)
+   - Explore the interactive tools and resources that make studying with ITCards unique.
+3. [**Technology Stack**](#technology-stack)
+   - Dive into the technologies powering ITCards.
+4. [**Project Structure**](#project-structure)
+   - Get acquainted with the architecture and layout of the project's files and directories.
+5. [**Getting Started**](#getting-started)
+   - Set up and run your own instance of ITCards.
+   - [Prerequisites](#prerequisites)
+   - [Installation](#installation)
+6. [**Usage**](#usage)
+   - Learn how to navigate and utilize ITCards for your learning and interview preparation.
+7. [**Contact**](#contact)
+   - Have questions or suggestions? Here's how to reach out.
+8. [**Acknowledgements**](#acknowledgements)
+   - A tribute to the tools, libraries, and frameworks that make ITCards possible.
 
-In the project directory, you can run:
+## About the Project
 
-### `npm start`
+ITCards is an interactive learning platform designed to help developers prepare for technical interviews and expand their programming knowledge across various technologies such as JavaScript, React, Angular, Node.js, PHP, and C#.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ITCards offers a range of features to provide an interactive and comprehensive learning experience:
 
-### `npm test`
+- **Interactive Flashcards**: Study and review technical concepts with flashcards that make learning dynamic and engaging. Flashcards are presented in a question and answer format, perfect for self-testing and memory reinforcement.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Interview Preparation Mode**: Specifically designed to help developers prepare for technical interviews, this mode allows users to go through common interview questions and answers, enhancing their readiness for real-world interviews.
 
-### `npm run build`
+- **Learning Mode**: Dive deep into subjects with a structured learning mode, which allows for extended sessions focused on understanding and mastering complex topics.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Support for Multiple Programming Languages**: Catering to a diverse range of developers, ITCards includes content for several programming languages including JavaScript, React, Angular, Node.js, PHP, and C#.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Progress Tracking**: Users can track their learning progress with a progress bar that visualizes their advancement through the content, providing a sense of accomplishment and a clear path to completion.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Responsive Design**: The platform is built using Material-UI, offering a responsive design that adapts to various screen sizes for a seamless learning experience on any device.
 
-### `npm run eject`
+- **User Authentication**: Secure login functionality with Firebase authentication ensures that user progress is saved and accessible across different sessions and devices.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Animation and Motion**: Utilizing Framer Motion, ITCards provides smooth and appealing animations, making the interaction with the app more intuitive and visually pleasing.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Localization and Internationalization**: With i18next, the platform supports internationalization, making it accessible to a global audience with multilingual support.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technology Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- Material-UI
+- Framer Motion for animations
+- React Router for navigation
+- Firebase for authentication
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Below is a brief overview of the project's folder structure:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+app/
+├── components/
+│   ├── Header.tsx
+│   └── ...
+├── context/
+│   └── appContext.tsx
+├── questions/
+│   └── questions.json
+├── routes/
+│   └── routeConfig.tsx
+├── screens/
+│   ├── developerPage.tsx
+│   └── ...
+├── locales/
+│   ├── en/
+│   │   └── translation.json
+│   └── pl/
+│       └── translation.json
+└── index.tsx
+```
 
-### Code Splitting
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Prerequisites
 
-### Analyzing the Bundle Size
+- Node.js
+- npm or Yarn
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Installation
 
-### Making a Progressive Web App
+1. Clone the repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+git clone https://github.com/yourusername/ITCards.git
+```
 
-### Advanced Configuration
+2. Install NPM packages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm install
+```
 
-### Deployment
+3. Start the development server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm start
+```
 
-### `npm run build` fails to minify
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To start using ITCards, simply register an account and choose your developer type. Select a programming language and start learning with either flashcards or the interview preparation mode.
+
+## Contact
+
+Szymon Adamowicz - adamowiczszymon8@gmail.com
+
+## Acknowledgements
+
+- [FontAwesome](https://fontawesome.com)
+- [i18next](https://www.i18next.com/)
+- [Marked](https://marked.js.org/)
