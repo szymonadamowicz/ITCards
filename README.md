@@ -93,7 +93,7 @@ app/
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/ITCards.git
+git clone https://github.com/adamowiczszymon8/ITCards.git
 ```
 
 2. Install NPM packages
