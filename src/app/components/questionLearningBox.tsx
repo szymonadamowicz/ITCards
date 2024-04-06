@@ -5,6 +5,14 @@ import rawQuestionData from "../questions/questions.json";
 import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
 import { marked } from "marked";
+import {
+  faArrowsRotate,
+  faChevronLeft,
+  faChevronRight,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 interface Question {
   question: string;
@@ -83,6 +91,8 @@ const QuestionInterviewBox: React.FC = () => {
     return { __html: marked.parse(text) };
   };
 
+  let navigate = useNavigate();
+
   return (
     <Box
       width={"100%"}
@@ -151,12 +161,13 @@ const QuestionInterviewBox: React.FC = () => {
             sx={{
               height: 300,
               width: 200,
-              bgcolor: "red",
-              "&:hover": { backgroundColor: "red" },
+              bgcolor: "white",
+              "&:hover": { backgroundColor: "white" },
             }}
           >
             <Typography
-              color="white"
+              color="black"
+              fontSize={13}
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < orderQuestions.length
@@ -180,12 +191,13 @@ const QuestionInterviewBox: React.FC = () => {
             sx={{
               height: 300,
               width: 200,
-              bgcolor: "red",
-              "&:hover": { backgroundColor: "red" },
+              bgcolor: "white",
+              "&:hover": { backgroundColor: "white" },
             }}
           >
             <Typography
-              color="white"
+              color="black"
+              fontSize={13}
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < orderQuestions.length
@@ -202,19 +214,26 @@ const QuestionInterviewBox: React.FC = () => {
           onClick={() => handleSwipe(-1)}
           disabled={currentQuestionIndex === 0}
         >
-          Previous Question
+          <FontAwesomeIcon icon={faChevronLeft} size="lg" />
         </Button>
         <Button
-          onClick={handleClick}
-          disabled={currentQuestionIndex >= orderQuestions.length}
+          onClick={
+            currentQuestionIndex >= orderQuestions.length
+              ? () => navigate("/firstPage")
+              : handleClick
+          }
         >
-          Show Answer
+          {currentQuestionIndex >= orderQuestions.length ? (
+            <FontAwesomeIcon icon={faHouse} size="lg" />
+          ) : (
+            <FontAwesomeIcon icon={faArrowsRotate} />
+          )}
         </Button>
         <Button
           onClick={() => handleSwipe(1)}
           disabled={currentQuestionIndex >= orderQuestions.length}
         >
-          Next Question
+          <FontAwesomeIcon icon={faChevronRight} size="lg" />
         </Button>
       </Box>
     </Box>

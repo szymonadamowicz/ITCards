@@ -69,12 +69,12 @@ const Developer = () => {
           height: "50px",
           width: "100%",
           marginTop: "10px",
-          backgroundColor: "red",
+          backgroundColor: "white",
           alignItems: "center",
           display: "flex",
           justifyContent: "center",
           "&:hover": {
-            backgroundColor: "red",
+            backgroundColor: "white",
           },
         }}
       />

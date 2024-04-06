@@ -16,7 +16,7 @@ const Login = () => {
     <Box>
       <Header titleHeader={t("Infiszki")} />
       <Box
-        marginTop={"60px"}
+        paddingTop={"60px"}
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}

@@ -37,7 +37,7 @@ const LoginContainer: React.FC = () => {
   return (
     <Box display="flex" alignItems="center" flexDirection="column">
       <Box
-        bgcolor="red"
+        bgcolor="white"
         p={5}
         borderRadius={2}
         boxShadow="10px 10px 20px #ccc"

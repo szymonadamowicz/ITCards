@@ -14,6 +14,7 @@ const Header: React.FC<Links> = ({ titleHeader, handleClick, backArrow }) => {
     <AppBar
       position="fixed"
       sx={{
+        backgroundColor: "#122D7B",
         top: 0,
         width: "100%",
         height: "50px",

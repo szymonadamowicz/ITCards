@@ -6,6 +6,14 @@ import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
 import { marked } from "marked";
 import { t } from "i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowsRotate,
+  faChevronRight,
+  faHouse,
+  faRotate,
+} from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 interface Question {
   question: string;
@@ -85,6 +93,8 @@ const QuestionInterviewBox: React.FC = () => {
     return { __html: marked.parse(text) };
   };
 
+  let navigate = useNavigate();
+
   return (
     <Box
       width={"100%"}
@@ -153,12 +163,13 @@ const QuestionInterviewBox: React.FC = () => {
             sx={{
               height: 300,
               width: 200,
-              bgcolor: "red",
-              "&:hover": { backgroundColor: "red" },
+              bgcolor: "white",
+              "&:hover": { backgroundColor: "white" },
             }}
           >
             <Typography
-              color="white"
+              color="black"
+              fontSize={13}
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < shuffledQuestions.length
@@ -182,12 +193,13 @@ const QuestionInterviewBox: React.FC = () => {
             sx={{
               height: 300,
               width: 200,
-              bgcolor: "red",
-              "&:hover": { backgroundColor: "red" },
+              bgcolor: "white",
+              "&:hover": { backgroundColor: "white" },
             }}
           >
             <Typography
-              color="white"
+              color="black"
+              fontSize={13}
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < shuffledQuestions.length
@@ -201,16 +213,23 @@ const QuestionInterviewBox: React.FC = () => {
       </motion.div>
       <Box display="flex" flexDirection="row" justifyContent="center" mt={2}>
         <Button
-          onClick={handleClick}
-          disabled={currentQuestionIndex >= shuffledQuestions.length}
+          onClick={
+            currentQuestionIndex >= shuffledQuestions.length
+              ? () => navigate("/firstPage")
+              : handleClick
+          }
         >
-          Show Answer
+          {currentQuestionIndex >= shuffledQuestions.length ? (
+            <FontAwesomeIcon icon={faHouse} size="lg" />
+          ) : (
+            <FontAwesomeIcon icon={faRotate} size="lg" />
+          )}
         </Button>
         <Button
           onClick={() => handleSwipe(1)}
           disabled={currentQuestionIndex >= shuffledQuestions.length}
         >
-          Next Question
+          <FontAwesomeIcon icon={faChevronRight} size="lg" />
         </Button>
       </Box>
     </Box>
