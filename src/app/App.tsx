@@ -4,6 +4,7 @@ import routes from "./routes/routeConfig";
 import { AppProvider } from "./context/appContext";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import "../global.css"
 
 function App() {
   const theme = createTheme({

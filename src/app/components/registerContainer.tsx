@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, TextField, Button, Typography, Snackbar } from "@mui/material";
 import { register } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/appContext";
 
 const Register: React.FC = () => {
+  const [userName, setUserName] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const { userName } = useAppContext();
-  const { changeUserName } = useAppContext();
 
   let navigate = useNavigate();
-  console.log(userName);
   const validateEmail = (email: string) => {
     const re =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.toLowerCase());
   };
 
-  useEffect(() => {
-    changeUserName("");
-  }, []);
+
 
   const handleRegister = async () => {
     if (!email || !password || !confirmPassword || !userName) {
@@ -88,7 +84,7 @@ const Register: React.FC = () => {
           label="Name"
           variant="outlined"
           value={userName}
-          onChange={(e) => changeUserName(e.target.value)}
+          onChange={(e) => setUserName(e.target.value)}
           fullWidth
           margin="normal"
         />

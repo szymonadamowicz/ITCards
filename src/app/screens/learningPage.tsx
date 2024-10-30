@@ -20,14 +20,14 @@ const Learning = () => {
         backArrow={true}
         handleClick={() => navigate(-1)}
       />
-      <Box mt={"100px"}>
-        {learningType == "INTERVIEW" ? (
+      <Box mt={"105px"}>
+        {learningType === "INTERVIEW" ? (
           <QuestionInterviewBox />
         ) : (
           <QuestionLearningBox />
         )}
       </Box>
-      <Box marginTop={"60px"}></Box>
+      <Box marginTop={"105px"}></Box>
     </Box>
   );
 };

@@ -36,24 +36,6 @@ const Developer = () => {
       case "PHP":
         languages = ["INTERVIEW", "LEARNING"];
         break;
-      case "JAVASCRIPT":
-        languages = ["INTERVIEW", "LEARNING"];
-        break;
-      case "REACT":
-        languages = ["INTERVIEW", "LEARNING"];
-        break;
-      case "ANGULAR":
-        languages = ["INTERVIEW", "LEARNING"];
-        break;
-      case "C#":
-        languages = ["INTERVIEW", "LEARNING"];
-        break;
-      case "NODE.JS":
-        languages = ["INTERVIEW", "LEARNING"];
-        break;
-      case "PHP":
-        languages = ["INTERVIEW", "LEARNING"];
-        break;
       default:
         languages = [];
     }
@@ -64,18 +46,6 @@ const Developer = () => {
         handleClick={(type: string) => {
           changeLearningType(type);
           navigate("/learning");
-        }}
-        styles={{
-          height: "50px",
-          width: "100%",
-          marginTop: "10px",
-          backgroundColor: "white",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          "&:hover": {
-            backgroundColor: "white",
-          },
         }}
       />
     );
@@ -88,7 +58,7 @@ const Developer = () => {
         backArrow={true}
         handleClick={() => navigate(-1)}
       />
-      <Box marginTop={"60px"}>{renderLanguageBox()}</Box>
+      <Box marginTop={"105px"}>{renderLanguageBox()}</Box>
     </Box>
   );
 };

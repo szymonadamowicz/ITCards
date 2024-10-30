@@ -13,7 +13,7 @@ const Login = () => {
   };
 
   return (
-    <Box>
+    <Box height={"100vh"} alignContent={"center"}>
       <Header titleHeader={t("ITCards")} />
       <Box
         paddingTop={"60px"}

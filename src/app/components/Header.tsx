@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,19 +17,11 @@ const Header: React.FC<Links> = ({ titleHeader, handleClick, backArrow }) => {
         backgroundColor: "#122D7B",
         top: 0,
         width: "100%",
-        height: "50px",
+        height: "75px",
         boxShadow: "1px 1px 8px black",
+        justifyContent:"center"
       }}
     >
-      <Toolbar
-        variant="dense"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "50px !important",
-        }}
-      >
         {backArrow ? (
           <Button
             onClick={() => handleClick && handleClick()}
@@ -39,10 +31,9 @@ const Header: React.FC<Links> = ({ titleHeader, handleClick, backArrow }) => {
           </Button>
         ) : null}
 
-        <Typography variant="h6" sx={{ textAlign: "center" }}>
+        <Typography variant="h5" alignSelf={"center"}>
           {titleHeader?.toUpperCase()}
         </Typography>
-      </Toolbar>
     </AppBar>
   );
 };

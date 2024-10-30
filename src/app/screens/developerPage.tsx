@@ -36,18 +36,6 @@ const Developer = () => {
           changeLanguageType(type);
           navigate("/language");
         }}
-        styles={{
-          height: "50px",
-          width: "100%",
-          marginTop: "10px",
-          backgroundColor: "white",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          "&:hover": {
-            backgroundColor: "white",
-          },
-        }}
       />
     );
   };
@@ -59,7 +47,7 @@ const Developer = () => {
         backArrow={true}
         handleClick={() => navigate(-1)}
       />
-      <Box marginTop={"60px"}>{renderLanguageBox()}</Box>
+      <Box marginTop={"105px"}>{renderLanguageBox()}</Box>
     </Box>
   );
 };

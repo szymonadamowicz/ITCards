@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useAppContext } from "../context/appContext";
-import rawQuestionData from "../questions/questions.json";
+import fetchAllCards, { toggleLike } from "../backend/axios";
 import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
 import { marked } from "marked";
 import { t } from "i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowsRotate,
   faChevronRight,
+  faHeart,
   faHouse,
   faRotate,
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,8 +21,12 @@ interface Question {
 }
 
 interface QuestionData {
-  [key: string]: Question[];
+  id: string;
+  question: string;
+  answer: string;
+  liked: boolean;
 }
+
 const shuffleArray = (array: any[]) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -30,26 +34,56 @@ const shuffleArray = (array: any[]) => {
   }
 };
 
-const questionData: QuestionData = rawQuestionData;
-
 const QuestionInterviewBox: React.FC = () => {
+  const [questionData, setQuestionData] = useState<QuestionData[]>([]);
   const { languageType } = useAppContext();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
-  const [hasSwiped, setHasSwiped] = useState(false);
+  const [, setHasSwiped] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState(0);
+  const [refresh, setRefresh] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 960);
+
+  const handleLike = (id: number) => {
+    toggleLike(id);
+    setRefresh(refresh + 1);
+  };
 
   useEffect(() => {
-    const questionsDataMap =
-      questionData[languageType as keyof QuestionData] ||
-      questionData.JAVASCRIPT;
-    let shuffledQuestionsCopy = [...questionsDataMap];
+    const loadData = async () => {
+      if (languageType !== null) {
+        const cardsData = await fetchAllCards(languageType);
+
+        if (cardsData !== null) {
+          setQuestionData(cardsData);
+        }
+      }
+    };
+
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 960);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    let shuffledQuestionsCopy = [...questionData];
     shuffleArray(shuffledQuestionsCopy);
     setShuffledQuestions(shuffledQuestionsCopy);
     setCurrentQuestionIndex(0);
-  }, [languageType]);
+  }, [languageType, questionData]);
 
   const handleSwipe = (direction: number) => {
     setSwipeDirection(direction);
@@ -102,12 +136,17 @@ const QuestionInterviewBox: React.FC = () => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      height={"80vh"}
+      gap={5}
     >
-      <Box mb={5}>
-        <Typography textAlign={"center"}>
+      <Box>
+        <Typography textAlign={"center"} fontSize={24}>
           {currentQuestionIndex}/{shuffledQuestions.length}
         </Typography>
-        <progress value={currentQuestionIndex / 5} />
+        <progress
+          style={{ width: 250, height: 10 }}
+          value={currentQuestionIndex / shuffledQuestions.length}
+        />
       </Box>
       <motion.div
         key={currentQuestionIndex}
@@ -117,8 +156,8 @@ const QuestionInterviewBox: React.FC = () => {
         animate="center"
         exit="exit"
         transition={{
-          x: { type: "spring", stiffness: 300, damping: 30 },
-          opacity: { duration: 0.2 },
+          x: { type: "spring", stiffness: 180, damping: 20 },
+          opacity: { duration: 0.4 },
         }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -153,7 +192,7 @@ const QuestionInterviewBox: React.FC = () => {
             onClick={() => {
               if (
                 !hasDragged &&
-                currentQuestionIndex != shuffledQuestions.length
+                currentQuestionIndex !== shuffledQuestions.length
               ) {
                 setIsFlipped((prev) => !prev);
               }
@@ -161,15 +200,24 @@ const QuestionInterviewBox: React.FC = () => {
             }}
             disabled={currentQuestionIndex >= shuffledQuestions.length}
             sx={{
-              height: 300,
-              width: 200,
+              height: isMobile ? 310 : 400,
+              width: isMobile ? 280 : 350,
+              padding: 15,
               bgcolor: "white",
               "&:hover": { backgroundColor: "white" },
             }}
           >
             <Typography
+              minWidth={isMobile ? 230 : 300}
+              minHeight={isMobile ? 230 : 350}
+              maxHeight={300}
+              maxWidth={300}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
               color="black"
-              fontSize={13}
+              textTransform="none"
+              fontSize={isMobile ? 18 : 24}
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < shuffledQuestions.length
@@ -183,7 +231,7 @@ const QuestionInterviewBox: React.FC = () => {
             onClick={() => {
               if (
                 !hasDragged &&
-                currentQuestionIndex != shuffledQuestions.length
+                currentQuestionIndex !== shuffledQuestions.length
               ) {
                 setIsFlipped((prev) => !prev);
               }
@@ -191,15 +239,24 @@ const QuestionInterviewBox: React.FC = () => {
             }}
             disabled={currentQuestionIndex >= shuffledQuestions.length}
             sx={{
-              height: 300,
-              width: 200,
+              height: isMobile ? 310 : 400,
+              width: isMobile ? 280 : 350,
+              padding: 15,
               bgcolor: "white",
               "&:hover": { backgroundColor: "white" },
             }}
           >
             <Typography
+              minWidth={isMobile ? 230 : 300}
+              minHeight={isMobile ? 230 : 350}
+              maxHeight={300}
+              maxWidth={300}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
               color="black"
-              fontSize={13}
+              textTransform="none"
+              fontSize={isMobile ? 18 : 24}
               dangerouslySetInnerHTML={
                 renderMarkdown(
                   currentQuestionIndex < shuffledQuestions.length
@@ -211,7 +268,7 @@ const QuestionInterviewBox: React.FC = () => {
           </Button>
         </ReactCardFlip>
       </motion.div>
-      <Box display="flex" flexDirection="row" justifyContent="center" mt={2}>
+      <Box display="flex" flexDirection="row" justifyContent="center">
         <Button
           onClick={
             currentQuestionIndex >= shuffledQuestions.length
@@ -225,6 +282,23 @@ const QuestionInterviewBox: React.FC = () => {
             <FontAwesomeIcon icon={faRotate} size="lg" />
           )}
         </Button>
+        {currentQuestionIndex < questionData.length && (
+          <Button
+            onClick={() =>
+              handleLike(Number(questionData[currentQuestionIndex].id))
+            }
+          >
+            <FontAwesomeIcon
+              icon={faHeart}
+              size="lg"
+              style={{
+                color: questionData[currentQuestionIndex]?.liked
+                  ? "red"
+                  : "grey",
+              }}
+            />
+          </Button>
+        )}
         <Button
           onClick={() => handleSwipe(1)}
           disabled={currentQuestionIndex >= shuffledQuestions.length}

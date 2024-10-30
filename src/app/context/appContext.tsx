@@ -7,8 +7,6 @@ type AppContextType = {
   changeLanguageType: (type: string) => void;
   learningType: string;
   changeLearningType: (type: string) => void;
-  userName: string;
-  changeUserName: (type: string) => void;
 };
 
 const defaultAppContextValue: AppContextType = {
@@ -18,8 +16,6 @@ const defaultAppContextValue: AppContextType = {
   changeLanguageType: () => {},
   learningType: "",
   changeLearningType: () => {},
-  userName: "",
-  changeUserName: () => {},
 };
 
 const AppContext = createContext<AppContextType>(defaultAppContextValue);
@@ -31,15 +27,25 @@ type AppProviderProps = {
 };
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-  const [developerType, setDeveloperType] = useState("");
-  const [languageType, setLanguageType] = useState("");
-  const [learningType, setLearningType] = useState("");
-  const [userName, setUserName] = useState("");
+  const [developerType, setDeveloperType] = useState(() => localStorage.getItem("developerType") || "");
+  const [languageType, setLanguageType] = useState(() => localStorage.getItem("languageType") || "");
+  const [learningType, setLearningType] = useState(() => localStorage.getItem("learningType") || "");
 
-  const changeDeveloperType = (type: string) => setDeveloperType(type);
-  const changeLanguageType = (type: string) => setLanguageType(type);
-  const changeLearningType = (type: string) => setLearningType(type);
-  const changeUserName = (type: string) => setUserName(type);
+  const changeDeveloperType = (type: string) => {
+    setDeveloperType(type);
+    localStorage.setItem("developerType", type);
+  };
+
+  const changeLanguageType = (type: string) => {
+    setLanguageType(type);
+    localStorage.setItem("languageType", type);
+  };
+
+  const changeLearningType = (type: string) => {
+    setLearningType(type);
+    localStorage.setItem("learningType", type);
+  };
+
 
   return (
     <AppContext.Provider
@@ -50,8 +56,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         changeLanguageType,
         learningType,
         changeLearningType,
-        userName,
-        changeUserName,
       }}
     >
       {children}

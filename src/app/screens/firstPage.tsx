@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Header from "../components/Header";
 import { t } from "i18next";
 import ContainerBox from "../components/containerBox";
 import { useAppContext } from "../context/appContext";
+import fetchAllCards, {toggleLike} from "../backend/axios";
 
 const FirstPage = () => {
   let navigate = useNavigate();
   const { changeDeveloperType } = useAppContext();
-  const { userName } = useAppContext();
   return (
     <Box>
       <Header titleHeader={t("ITCards")} />
-      <Box marginTop={"60px"}>
+      <Box marginTop={"105px"}>
         <ContainerBox
           Content={[
             "FRONT-END Developer",
@@ -24,18 +24,7 @@ const FirstPage = () => {
             changeDeveloperType(type);
             navigate("/developer");
           }}
-          styles={{
-            height: "50px",
-            width: "100%",
-            marginTop: "10px",
-            backgroundColor: "white",
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-            "&:hover": {
-              backgroundColor: "white",
-            },
-          }}
+          
         />
       </Box>
     </Box>
