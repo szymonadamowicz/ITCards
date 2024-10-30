@@ -1,11 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import Header from "../components/Header";
 import { t } from "i18next";
 import ContainerBox from "../components/containerBox";
 import { useAppContext } from "../context/appContext";
-import fetchAllCards, {toggleLike} from "../backend/axios";
 
 const FirstPage = () => {
   let navigate = useNavigate();

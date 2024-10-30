@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useAppContext } from "../context/appContext";
-import fetchAllCards, { toggleLike } from "../backend/axios";
+import { fetchAllCards, toggleLike } from "../backend/axios";
 import ReactCardFlip from "react-card-flip";
 import { motion } from "framer-motion";
 import { marked } from "marked";

@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import fetchAllCards, { toggleLike } from "../backend/axios";
+import { fetchAllCards, toggleLike } from "../backend/axios";
 
 interface Question {
   question: string;
